@@ -9,11 +9,20 @@ namespace EFCore_Postgres.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private readonly ElephantContext _context;
+
+        public ValuesController(ElephantContext context)
+        {
+            _context = context;
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            var films = _context.Films.Select(f => f.Title).ToList();
+
+            return films;
         }
 
         // GET api/values/5
