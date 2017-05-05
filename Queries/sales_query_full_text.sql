@@ -1,4 +1,4 @@
-with actor_rollup  as (select f.film_id, title, sum(p.amount)::money as total_sales,
+with actor_rollup as (select f.film_id, title, sum(p.amount)::money as total_sales,
 group_concat(first_name || ' ' || last_name) as actors,
 to_tsvector(concat(f.title, ' ', group_concat(first_name || ' ' || last_name))) as search_field
 from film f
